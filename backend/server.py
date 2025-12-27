@@ -667,7 +667,12 @@ async def create_scheda_medicazione_med(data: SchedaMedicazioneMEDCreate, payloa
     if data.ambulatorio.value not in payload["ambulatori"]:
         raise HTTPException(status_code=403, detail="Non hai accesso a questo ambulatorio")
     
-    scheda = SchedaMedicazioneMED(**data.model_dump())
+    # Generate unique code for the scheda
+    codice = generate_scheda_code(data.data_compilazione)
+    
+    scheda_data = data.model_dump()
+    scheda_data["codice"] = codice
+    scheda = SchedaMedicazioneMED(**scheda_data)
     doc = scheda.model_dump()
     await db.schede_medicazione_med.insert_one(doc)
     return scheda
