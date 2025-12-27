@@ -1048,7 +1048,7 @@ export const SchedaImpiantoPICC = ({ patientId, ambulatorio, schede, onRefresh, 
           <AlertDialogHeader>
             <AlertDialogTitle>Conferma eliminazione</AlertDialogTitle>
             <AlertDialogDescription>
-              Sei sicuro di voler eliminare questa scheda? L'azione non può essere annullata.
+              Sei sicuro di voler eliminare questa scheda? Questa azione non può essere annullata.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
