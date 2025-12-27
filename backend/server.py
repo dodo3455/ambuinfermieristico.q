@@ -185,9 +185,21 @@ class SchedaMedicazioneMEDCreate(BaseModel):
     firma: Optional[str] = None
     foto_ids: List[str] = []
 
+# Helper to generate unique scheda code
+def generate_scheda_code(data_compilazione: str) -> str:
+    """Generate unique code for scheda: MED-DDMMYY-XXXX"""
+    try:
+        dt = datetime.strptime(data_compilazione, "%Y-%m-%d")
+        date_part = dt.strftime("%d%m%y")
+    except:
+        date_part = datetime.now().strftime("%d%m%y")
+    random_part = uuid.uuid4().hex[:4].upper()
+    return f"MED-{date_part}-{random_part}"
+
 class SchedaMedicazioneMED(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    codice: str = Field(default="")  # Codice identificativo univoco
     patient_id: str
     ambulatorio: Ambulatorio
     data_compilazione: str
