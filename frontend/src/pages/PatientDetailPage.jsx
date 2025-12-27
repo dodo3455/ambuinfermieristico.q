@@ -342,6 +342,11 @@ export default function PatientDetailPage() {
             <h1 className="text-2xl font-bold tracking-tight">
               {patient.cognome} {patient.nome}
             </h1>
+            {patient.codice_paziente && (
+              <span className="text-sm font-mono bg-gray-100 px-2 py-1 rounded text-gray-600">
+                {patient.codice_paziente}
+              </span>
+            )}
             <Badge
               className={
                 patient.tipo === "PICC"
