@@ -73,6 +73,7 @@ export const SchedaImpiantoPICC = ({ patientId, ambulatorio, schede, onRefresh }
   const [selectedScheda, setSelectedScheda] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [schedaType, setSchedaType] = useState("semplificata");
   const [formData, setFormData] = useState({
     scheda_type: "semplificata",
     data_impianto: format(new Date(), "yyyy-MM-dd"),
