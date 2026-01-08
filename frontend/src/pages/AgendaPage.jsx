@@ -247,25 +247,59 @@ export default function AgendaPage() {
     try {
       await apiClient.delete(`/appointments/${appointmentId}`);
       toast.success("Appuntamento rimosso");
+      setEditDialogOpen(false);
+      setEditingAppointment(null);
       fetchData();
     } catch (error) {
       toast.error("Errore nella rimozione");
     }
   };
 
-  // Cambio stato appuntamento (ciclico: da_fare -> effettuato -> non_presentato -> da_fare)
-  const handleToggleStato = async (e, appointment) => {
+  // Apre dialog di modifica appuntamento
+  const handleOpenEditDialog = (e, appointment) => {
     e.stopPropagation();
-    const statoOrder = ["da_fare", "effettuato", "non_presentato"];
-    const currentIndex = statoOrder.indexOf(appointment.stato || "da_fare");
-    const nextStato = statoOrder[(currentIndex + 1) % statoOrder.length];
-    
+    setEditingAppointment(appointment);
+    setEditPrestazioni(appointment.prestazioni || []);
+    setEditDialogOpen(true);
+  };
+
+  // Cambia stato appuntamento
+  const handleChangeStato = async (newStato) => {
+    if (!editingAppointment) return;
     try {
-      await apiClient.put(`/appointments/${appointment.id}`, { stato: nextStato });
+      await apiClient.put(`/appointments/${editingAppointment.id}`, { stato: newStato });
+      toast.success(newStato === "effettuato" ? "Segnato come effettuato" : "Segnato come non presentato");
+      setEditDialogOpen(false);
+      setEditingAppointment(null);
       fetchData();
     } catch (error) {
       toast.error("Errore nel cambio stato");
     }
+  };
+
+  // Salva modifiche prestazioni
+  const handleSavePrestazioni = async () => {
+    if (!editingAppointment || editPrestazioni.length === 0) {
+      toast.error("Seleziona almeno una prestazione");
+      return;
+    }
+    try {
+      await apiClient.put(`/appointments/${editingAppointment.id}`, { prestazioni: editPrestazioni });
+      toast.success("Prestazioni aggiornate");
+      setEditDialogOpen(false);
+      setEditingAppointment(null);
+      fetchData();
+    } catch (error) {
+      toast.error("Errore nell'aggiornamento");
+    }
+  };
+
+  const handleEditPrestazioneToggle = (prestazioneId) => {
+    setEditPrestazioni((prev) =>
+      prev.includes(prestazioneId)
+        ? prev.filter((p) => p !== prestazioneId)
+        : [...prev, prestazioneId]
+    );
   };
 
   const handleCreatePatient = async () => {
