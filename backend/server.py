@@ -994,6 +994,10 @@ def generate_scheda_impianto_pdf(scheda: dict, patient: dict) -> bytes:
     disinfezione = get_val('disinfezione') or []
     story.append(Paragraph(f"<b>DISINFEZIONE DELLA CUTE INTEGRA:</b>  {cb_list(disinfezione, 'clorexidina_2')} CLOREXIDINA IN SOLUZIONE ALCOLICA 2%    {cb_list(disinfezione, 'iodiopovidone')} IODIOPOVIDONE", small_style))
     
+    # COLLA HYSTOACRILICA (nuovo)
+    colla = get_val('colla_hystoacrilica')
+    story.append(Paragraph(f"<b>UTILIZZO COLLA HYSTOACRILICA:</b>  {cb(colla == True)} SI  {cb(colla == False)} NO", small_style))
+    
     # DISPOSITIVI
     sut = get_val('sutureless_device')
     story.append(Paragraph(f"<b>IMPIEGO DI \"SUTURELESS DEVICES\" PER IL FISSAGGIO DEL CATETERE:</b>  {cb(sut == True)} SI  {cb(sut == False)} NO", small_style))
@@ -1002,10 +1006,10 @@ def generate_scheda_impianto_pdf(scheda: dict, patient: dict) -> bytes:
     med_occl = get_val('medicazione_occlusiva')
     story.append(Paragraph(f"<b>IMPIEGO DI MEDICAZIONE SEMIPERMEABILE TRASPARENTE:</b>  {cb(med_trasp == True)} SI  {cb(med_trasp == False)} NO    <b>IMPIEGO DI MEDICAZIONE OCCLUSIVA:</b>  {cb(med_occl == True)} SI  {cb(med_occl == False)} NO", small_style))
     
-    # CONTROLLI
+    # CONTROLLI (aggiornato con ECG intracavitario)
     rx_post = get_val('controllo_rx')
-    ecg_post = get_val('controllo_ecg')
-    story.append(Paragraph(f"<b>CONTROLLO RX POST-INSERIMENTO:</b>  {cb(rx_post == True)} SI  {cb(rx_post == False)} NO    <b>CONTROLLO ECG POST INSERIMENTO:</b>  {cb(ecg_post == True)} SI  {cb(ecg_post == False)} NO", small_style))
+    ecg_intra = get_val('ecg_intracavitario')
+    story.append(Paragraph(f"<b>CONTROLLO RX POST-INSERIMENTO:</b>  {cb(rx_post == True)} SI  {cb(rx_post == False)} NO    <b>ECG INTRACAVITARIO:</b>  {cb(ecg_intra == True)} SI  {cb(ecg_intra == False)} NO", small_style))
     
     # MODALITÀ
     mod = get_val('modalita')
