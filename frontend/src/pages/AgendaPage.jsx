@@ -104,7 +104,7 @@ export default function AgendaPage() {
   const [editPrestazioni, setEditPrestazioni] = useState([]);
   
   // Timer per gestire click singolo vs doppio click
-  const clickTimerRef = React.useRef(null);
+  const clickTimerRef = useRef(null);
   
   // New patient form state
   const [newPatientNome, setNewPatientNome] = useState("");
