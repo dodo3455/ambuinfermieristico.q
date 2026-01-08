@@ -111,7 +111,7 @@ export default function AgendaPage() {
 
   // Naviga alla cartella clinica del paziente
   const goToPatientFolder = (patientId) => {
-    navigate(`/patients/${patientId}`);
+    navigate(`/pazienti/${patientId}`);
   };
 
   const fetchData = useCallback(async () => {
