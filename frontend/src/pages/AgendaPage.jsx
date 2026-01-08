@@ -750,12 +750,25 @@ export default function AgendaPage() {
             </div>
 
             <div className="flex justify-between pt-4">
-              <Button
-                variant="destructive"
-                onClick={() => handleDeleteAppointment(editingAppointment?.id)}
-              >
-                Elimina
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="destructive"
+                  onClick={() => handleDeleteAppointment(editingAppointment?.id)}
+                >
+                  Elimina
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setEditDialogOpen(false);
+                    goToPatientFolder(editingAppointment?.patient_id);
+                  }}
+                  className="border-blue-300 text-blue-600 hover:bg-blue-50"
+                >
+                  <ExternalLink className="w-4 h-4 mr-1" />
+                  Apri Cartella
+                </Button>
+              </div>
               <div className="flex gap-2">
                 <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
                   Annulla
