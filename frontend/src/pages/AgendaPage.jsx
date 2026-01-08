@@ -95,6 +95,11 @@ export default function AgendaPage() {
   const [selectedPrestazioni, setSelectedPrestazioni] = useState([]);
   const [calendarOpen, setCalendarOpen] = useState(false);
   
+  // Edit appointment dialog state
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editingAppointment, setEditingAppointment] = useState(null);
+  const [editPrestazioni, setEditPrestazioni] = useState([]);
+  
   // New patient form state
   const [newPatientNome, setNewPatientNome] = useState("");
   const [newPatientCognome, setNewPatientCognome] = useState("");
