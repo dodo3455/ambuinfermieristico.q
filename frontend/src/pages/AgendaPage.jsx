@@ -36,8 +36,10 @@ import {
   Droplets,
   CircleDot,
   UserPlus,
+  ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const TIME_SLOTS = [
   "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00",
