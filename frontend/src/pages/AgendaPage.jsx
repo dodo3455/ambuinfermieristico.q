@@ -248,6 +248,21 @@ export default function AgendaPage() {
     }
   };
 
+  // Cambio stato appuntamento (ciclico: da_fare -> effettuato -> non_presentato -> da_fare)
+  const handleToggleStato = async (e, appointment) => {
+    e.stopPropagation();
+    const statoOrder = ["da_fare", "effettuato", "non_presentato"];
+    const currentIndex = statoOrder.indexOf(appointment.stato || "da_fare");
+    const nextStato = statoOrder[(currentIndex + 1) % statoOrder.length];
+    
+    try {
+      await apiClient.put(`/appointments/${appointment.id}`, { stato: nextStato });
+      fetchData();
+    } catch (error) {
+      toast.error("Errore nel cambio stato");
+    }
+  };
+
   const handleCreatePatient = async () => {
     if (!newPatientNome || !newPatientCognome) {
       toast.error("Inserisci nome e cognome");
