@@ -169,6 +169,7 @@ class AppointmentCreate(BaseModel):
     tipo: str  # PICC or MED
     prestazioni: List[str]
     note: Optional[str] = None
+    stato: Optional[str] = "da_fare"  # da_fare, effettuato, non_presentato
 
 class Appointment(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -182,7 +183,8 @@ class Appointment(BaseModel):
     tipo: str
     prestazioni: List[str]
     note: Optional[str] = None
-    completed: bool = False
+    stato: str = "da_fare"  # da_fare, effettuato, non_presentato
+    completed: bool = False  # kept for backward compatibility
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 # Scheda Medicazione MED
