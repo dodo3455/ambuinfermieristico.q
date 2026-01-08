@@ -70,11 +70,11 @@ const DISINFEZIONE_OPTIONS = [
   { id: "iodiopovidone", label: "IODIOPOVIDONE" },
 ];
 
-// Opzioni motivazione
+// Opzioni motivazione - aggiornato da nuovo PDF
 const MOTIVAZIONE_OPTIONS = [
   { id: "chemioterapia", label: "Chemioterapia" },
-  { id: "difficolta_vene", label: "Difficoltà nel reperire vene" },
-  { id: "terapia_prolungata", label: "Terapia prolungata" },
+  { id: "scarso_patrimonio_venoso", label: "Scarso patrimonio venoso" },
+  { id: "npt", label: "NPT (Nutrizione Parenterale)" },
   { id: "monitoraggio", label: "Monitoraggio invasivo" },
   { id: "altro", label: "Altro" },
 ];
