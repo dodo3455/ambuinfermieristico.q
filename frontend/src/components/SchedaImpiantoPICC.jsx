@@ -874,13 +874,13 @@ export const SchedaImpiantoPICC = ({ patientId, ambulatorio, schede, onRefresh, 
 
       {/* FOOTER */}
       <div className="border-2 border-gray-300 p-2 space-y-1.5">
-        <div className="flex items-center gap-3 text-[11px]">
+        <div className="flex items-center gap-3 text-[11px] flex-wrap">
           <b>DATA:</b>
           <Input type="date" value={data.data_posizionamento || ''} onChange={e => setFormData(p => ({...p, data_posizionamento: e.target.value}))} disabled={readOnly} className="h-6 text-[11px] w-32" />
-          <b className="ml-2">OPERATORE:</b>
-          <Input value={data.operatore || ''} onChange={e => setFormData(p => ({...p, operatore: e.target.value}))} disabled={readOnly} className="h-6 text-[11px] flex-1" />
-          <b>FIRMA:</b>
-          <div className="w-24 border-b border-gray-400"></div>
+          <b className="ml-2">1° OPERATORE:</b>
+          <Input value={data.operatore || ''} onChange={e => setFormData(p => ({...p, operatore: e.target.value}))} disabled={readOnly} className="h-6 text-[11px] w-32" placeholder="Nome" />
+          <b>2° OPERATORE:</b>
+          <Input value={data.secondo_operatore || ''} onChange={e => setFormData(p => ({...p, secondo_operatore: e.target.value}))} disabled={readOnly} className="h-6 text-[11px] w-32" placeholder="Nome" />
         </div>
       </div>
 
