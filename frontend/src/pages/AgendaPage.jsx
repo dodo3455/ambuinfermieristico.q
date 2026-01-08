@@ -699,17 +699,17 @@ export default function AgendaPage() {
                   variant={editingAppointment?.stato === "effettuato" ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleChangeStato("effettuato")}
-                  className="flex-1"
+                  className={`flex-1 ${editingAppointment?.stato === "effettuato" ? "bg-green-600 hover:bg-green-700" : "hover:bg-green-50 hover:text-green-700 hover:border-green-300"}`}
                 >
-                  Effettuato
+                  ✓ Effettuato
                 </Button>
                 <Button
                   variant={editingAppointment?.stato === "non_presentato" ? "destructive" : "outline"}
                   size="sm"
                   onClick={() => handleChangeStato("non_presentato")}
-                  className="flex-1"
+                  className={`flex-1 ${editingAppointment?.stato !== "non_presentato" ? "hover:bg-red-50 hover:text-red-700 hover:border-red-300" : ""}`}
                 >
-                  Non Presentato
+                  ✗ Non Presentato
                 </Button>
               </div>
             </div>
