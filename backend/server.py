@@ -1015,22 +1015,23 @@ def generate_scheda_impianto_pdf(scheda: dict, patient: dict) -> bytes:
     mod = get_val('modalita')
     story.append(Paragraph(f"<b>MODALITÀ:</b>  {cb(mod == 'emergenza')} EMERGENZA  {cb(mod == 'urgenza')} URGENZA  {cb(mod == 'elezione')} ELEZIONE", small_style))
     
-    # MOTIVAZIONE
+    # MOTIVAZIONE - Aggiornato con nuove opzioni
     motivazione = get_val('motivazione') or []
-    motiv_line = f"<b>MOTIVAZIONE DI INSERIMENTO CVC:</b>  {cb_list(motivazione, 'chemioterapia')} chemioterapia  {cb_list(motivazione, 'difficolta_vene')} difficoltà nel reperire vene  {cb_list(motivazione, 'terapia_prolungata')} terapia prolungata  {cb_list(motivazione, 'monitoraggio')} monitoraggio invasivo  {cb_list(motivazione, 'altro')} altro"
+    motiv_line = f"<b>MOTIVAZIONE DI INSERIMENTO CVC:</b>  {cb_list(motivazione, 'chemioterapia')} chemioterapia  {cb_list(motivazione, 'scarso_patrimonio_venoso')} scarso patrimonio venoso  {cb_list(motivazione, 'npt')} NPT  {cb_list(motivazione, 'monitoraggio')} monitoraggio invasivo  {cb_list(motivazione, 'altro')} altro"
     if 'altro' in motivazione:
         motiv_line += f" (specificare): {get_val('motivazione_altro')}"
     story.append(Paragraph(motiv_line, small_style))
     
     story.append(Spacer(1, 10))
     
-    # === FOOTER ===
+    # === FOOTER con 1° e 2° operatore ===
     data_pos = get_val('data_posizionamento') or get_val('data_impianto')
     footer_data = [
         [Paragraph("<b>DATA POSIZIONAMENTO:</b>", small_style), data_pos, "", ""],
-        [Paragraph("<b>COGNOME NOME OPERATORE CHE HA IMPIANTATO IL CATETERE:</b>", small_style), get_val('operatore'), Paragraph("<b>FIRMA:</b>", small_style), "________________"],
+        [Paragraph("<b>1° OPERATORE:</b>", small_style), get_val('operatore'), Paragraph("<b>FIRMA:</b>", small_style), "________________"],
+        [Paragraph("<b>2° OPERATORE:</b>", small_style), get_val('secondo_operatore'), Paragraph("<b>FIRMA:</b>", small_style), "________________"],
     ]
-    ft = Table(footer_data, colWidths=[6*cm, 5*cm, 2*cm, 5.5*cm])
+    ft = Table(footer_data, colWidths=[4*cm, 6*cm, 2*cm, 6.5*cm])
     ft.setStyle(TableStyle([
         ('FONTSIZE', (0, 0), (-1, -1), 7),
         ('BOX', (0, 0), (-1, -1), 1, colors.black),
