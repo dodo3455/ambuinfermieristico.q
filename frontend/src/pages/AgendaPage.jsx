@@ -103,6 +103,9 @@ export default function AgendaPage() {
   const [editingAppointment, setEditingAppointment] = useState(null);
   const [editPrestazioni, setEditPrestazioni] = useState([]);
   
+  // Timer per gestire click singolo vs doppio click
+  const clickTimerRef = React.useRef(null);
+  
   // New patient form state
   const [newPatientNome, setNewPatientNome] = useState("");
   const [newPatientCognome, setNewPatientCognome] = useState("");
@@ -112,6 +115,24 @@ export default function AgendaPage() {
   // Naviga alla cartella clinica del paziente
   const goToPatientFolder = (patientId) => {
     navigate(`/pazienti/${patientId}`);
+  };
+
+  // Gestisce click sul chip paziente con distinzione singolo/doppio click
+  const handlePatientChipClick = (e, apt) => {
+    e.stopPropagation();
+    
+    if (clickTimerRef.current) {
+      // Doppio click: cancella timer e vai alla cartella
+      clearTimeout(clickTimerRef.current);
+      clickTimerRef.current = null;
+      goToPatientFolder(apt.patient_id);
+    } else {
+      // Primo click: imposta timer per aprire popup
+      clickTimerRef.current = setTimeout(() => {
+        clickTimerRef.current = null;
+        handleOpenEditDialog(e, apt);
+      }, 250); // 250ms per distinguere doppio click
+    }
   };
 
   const fetchData = useCallback(async () => {
