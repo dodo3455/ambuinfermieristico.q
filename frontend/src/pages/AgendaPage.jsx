@@ -450,28 +450,19 @@ export default function AgendaPage() {
                   {/* PICC Column */}
                   <div
                     key={`picc-${ora}`}
-                    className={`bg-card min-h-[60px] p-1.5 ${holidayToday ? "bg-muted cursor-not-allowed" : "cursor-pointer hover:bg-emerald-50"}`}
+                    className={`bg-card min-h-[70px] p-2 ${holidayToday ? "bg-muted cursor-not-allowed" : "cursor-pointer hover:bg-emerald-50"}`}
                     onClick={() => !holidayToday && handleSlotClick(ora, "PICC")}
                     data-testid={`agenda-slot-${ora}-picc`}
                   >
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {getAppointmentsForSlot(ora, "PICC").map((apt) => (
                         <div
                           key={apt.id}
-                          className={`group relative px-3 py-1.5 rounded-md border cursor-pointer transition-all ${getStatoColorClass(apt.stato || "da_fare")}`}
-                          title={`${apt.prestazioni.join(", ")} - Clicca per cambiare stato`}
-                          onClick={(e) => handleToggleStato(e, apt)}
+                          className={`relative px-4 py-2 rounded-lg border-2 cursor-pointer transition-all shadow-sm hover:shadow-md ${getStatoColorClass(apt.stato || "da_fare")}`}
+                          title={`${apt.prestazioni.join(", ")} - Clicca per gestire`}
+                          onClick={(e) => handleOpenEditDialog(e, apt)}
                         >
-                          <span className="font-semibold text-sm truncate max-w-[140px] block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteAppointment(apt.id);
-                            }}
-                            className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs transition-opacity"
-                          >
-                            <X className="w-3 h-3" />
-                          </button>
+                          <span className="font-bold text-base block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
                         </div>
                       ))}
                     </div>
@@ -486,28 +477,19 @@ export default function AgendaPage() {
                   {!isVillaGinestre && (
                     <div
                       key={`med-${ora}`}
-                      className={`bg-card min-h-[60px] p-1.5 ${holidayToday ? "bg-muted cursor-not-allowed" : "cursor-pointer hover:bg-blue-50"}`}
+                      className={`bg-card min-h-[70px] p-2 ${holidayToday ? "bg-muted cursor-not-allowed" : "cursor-pointer hover:bg-blue-50"}`}
                       onClick={() => !holidayToday && handleSlotClick(ora, "MED")}
                       data-testid={`agenda-slot-${ora}-med`}
                     >
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {getAppointmentsForSlot(ora, "MED").map((apt) => (
                           <div
                             key={apt.id}
-                            className={`group relative px-3 py-1.5 rounded-md border cursor-pointer transition-all ${getStatoColorClass(apt.stato || "da_fare")}`}
-                            title={`${apt.prestazioni.join(", ")} - Clicca per cambiare stato`}
-                            onClick={(e) => handleToggleStato(e, apt)}
+                            className={`relative px-4 py-2 rounded-lg border-2 cursor-pointer transition-all shadow-sm hover:shadow-md ${getStatoColorClass(apt.stato || "da_fare")}`}
+                            title={`${apt.prestazioni.join(", ")} - Clicca per gestire`}
+                            onClick={(e) => handleOpenEditDialog(e, apt)}
                           >
-                            <span className="font-semibold text-sm truncate max-w-[140px] block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteAppointment(apt.id);
-                              }}
-                              className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-destructive text-destructive-foreground rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs transition-opacity"
-                            >
-                              <X className="w-3 h-3" />
-                            </button>
+                            <span className="font-bold text-base block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
                           </div>
                         ))}
                       </div>
