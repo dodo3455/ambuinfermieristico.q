@@ -438,7 +438,7 @@ DOCUMENT_TEMPLATES = [
     {"id": "brochure_picc_port", "nome": "Brochure PICC Port", "categoria": "PICC", "tipo_file": "pdf", "url": "https://customer-assets.emergentagent.com/job_medhub-38/artifacts/cein282q_Picc%20Port.pdf"},
     {"id": "brochure_picc", "nome": "Brochure PICC", "categoria": "PICC", "tipo_file": "pdf", "url": "https://customer-assets.emergentagent.com/job_medhub-38/artifacts/kk882djy_Picc.pdf"},
     {"id": "scheda_impianto_picc", "nome": "Scheda Impianto e Gestione AV", "categoria": "PICC", "tipo_file": "pdf", "url": "https://customer-assets.emergentagent.com/job_medhub-38/artifacts/sbw1iws9_Sch%20Impianto%20Gestione%20AV%20NEW.pdf"},
-    {"id": "specifiche_impianto_picc", "nome": "Specifiche Impianto", "categoria": "PICC", "tipo_file": "pdf", "url": "https://customer-assets.emergentagent.com/job_medhub-38/artifacts/03keycn2_specifiche%20impianto.pdf"},
+    {"id": "scheda_impianto_pdf", "nome": "Scheda Impianto", "categoria": "PICC", "tipo_file": "pdf", "url": "https://customer-assets.emergentagent.com/job_docucare-6/artifacts/3c52ewuw_Scheda%20Impianto.pdf"},
 ]
 
 # Italian holidays for Palermo
