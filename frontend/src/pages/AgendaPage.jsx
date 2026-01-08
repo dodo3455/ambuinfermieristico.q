@@ -675,6 +675,89 @@ export default function AgendaPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Edit Appointment Dialog */}
+      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Gestisci Appuntamento</DialogTitle>
+            <DialogDescription>
+              {editingAppointment && (
+                <>
+                  {editingAppointment.patient_cognome} {editingAppointment.patient_nome} - {editingAppointment.ora} ({editingAppointment.tipo})
+                </>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {/* Stato */}
+            <div className="space-y-2">
+              <Label>Stato Appuntamento</Label>
+              <div className="flex gap-2">
+                <Button
+                  variant={editingAppointment?.stato === "effettuato" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleChangeStato("effettuato")}
+                  className="flex-1"
+                >
+                  Effettuato
+                </Button>
+                <Button
+                  variant={editingAppointment?.stato === "non_presentato" ? "destructive" : "outline"}
+                  size="sm"
+                  onClick={() => handleChangeStato("non_presentato")}
+                  className="flex-1"
+                >
+                  Non Presentato
+                </Button>
+              </div>
+            </div>
+
+            {/* Prestazioni */}
+            <div className="space-y-2">
+              <Label>Prestazioni</Label>
+              <div className="grid gap-2">
+                {(editingAppointment?.tipo === "PICC" ? PRESTAZIONI_PICC : PRESTAZIONI_MED).map((prest) => (
+                  <div
+                    key={prest.id}
+                    className={`flex items-center gap-3 p-3 border rounded-lg cursor-pointer transition-colors ${
+                      editPrestazioni.includes(prest.id)
+                        ? "border-primary bg-primary/5"
+                        : "hover:border-primary/50"
+                    }`}
+                    onClick={() => handleEditPrestazioneToggle(prest.id)}
+                  >
+                    <Checkbox
+                      checked={editPrestazioni.includes(prest.id)}
+                      onCheckedChange={() => handleEditPrestazioneToggle(prest.id)}
+                    />
+                    <prest.icon className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm">{prest.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between pt-4">
+              <Button
+                variant="destructive"
+                onClick={() => handleDeleteAppointment(editingAppointment?.id)}
+              >
+                Elimina
+              </Button>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
+                  Annulla
+                </Button>
+                <Button onClick={handleSavePrestazioni}>
+                  Salva Prestazioni
+                </Button>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
