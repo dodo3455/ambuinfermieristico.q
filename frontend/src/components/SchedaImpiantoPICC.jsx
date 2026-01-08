@@ -796,9 +796,27 @@ export const SchedaImpiantoPICC = ({ patientId, ambulatorio, schede, onRefresh, 
                 <span>{opt.label}</span>
               </span>
             ))}
-            <span className="ml-1">Exit-site:</span>
-            <Input value={data.exit_site_cm || ''} onChange={e => setFormData(p => ({...p, exit_site_cm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" />
-            <span>cm</span>
+          </div>
+          {/* Misure catetere */}
+          <div className="flex items-center gap-2 flex-wrap text-[10px]">
+            <span>Diametro vena:</span>
+            <Input value={data.diametro_vena_mm || ''} onChange={e => setFormData(p => ({...p, diametro_vena_mm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" placeholder="mm" />
+            <span>Profondità:</span>
+            <Input value={data.profondita_cm || ''} onChange={e => setFormData(p => ({...p, profondita_cm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" placeholder="cm" />
+            <span>Exit-site:</span>
+            <Input value={data.exit_site_cm || ''} onChange={e => setFormData(p => ({...p, exit_site_cm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" placeholder="cm" />
+          </div>
+          <div className="flex items-center gap-2 flex-wrap text-[10px]">
+            <span>Lung. totale:</span>
+            <Input value={data.lunghezza_totale_cm || ''} onChange={e => setFormData(p => ({...p, lunghezza_totale_cm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" placeholder="cm" />
+            <span>Lung. impiantata:</span>
+            <Input value={data.lunghezza_impiantata_cm || ''} onChange={e => setFormData(p => ({...p, lunghezza_impiantata_cm: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" placeholder="cm" />
+            <span>French:</span>
+            <Input value={data.french || ''} onChange={e => setFormData(p => ({...p, french: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" />
+            <span>Lumi:</span>
+            <Input value={data.lumi || ''} onChange={e => setFormData(p => ({...p, lumi: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-10" />
+            <span>Lotto:</span>
+            <Input value={data.lotto || ''} onChange={e => setFormData(p => ({...p, lotto: e.target.value}))} disabled={readOnly} className="h-5 text-[10px] w-20" />
           </div>
           {/* PROCEDURE */}
           <div className="grid grid-cols-2 gap-1">
