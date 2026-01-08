@@ -825,14 +825,15 @@ export const SchedaImpiantoPICC = ({ patientId, ambulatorio, schede, onRefresh, 
               { key: 'ecoguidato', label: 'Ecoguidato' },
               { key: 'igiene_mani', label: 'Igiene mani' },
               { key: 'precauzioni_barriera', label: 'Precauzioni barriera' },
+              { key: 'colla_hystoacrilica', label: 'Colla hystoacrilica' },
               { key: 'sutureless_device', label: 'Sutureless device' },
               { key: 'medicazione_trasparente', label: 'Med. trasparente' },
               { key: 'medicazione_occlusiva', label: 'Med. occlusiva' },
               { key: 'controllo_rx', label: 'Controllo RX' },
-              { key: 'controllo_ecg', label: 'Controllo ECG' },
+              { key: 'ecg_intracavitario', label: 'ECG intracavitario' },
             ].map(item => (
               <div key={item.key} className="flex items-center gap-1">
-                <span className="w-24 truncate">{item.label}:</span>
+                <span className="w-28 truncate">{item.label}:</span>
                 <Checkbox checked={data[item.key] === true} onCheckedChange={(c) => !readOnly && setFormData(p => ({...p, [item.key]: c ? true : null}))} disabled={readOnly} className="h-3 w-3" /><span>SI</span>
                 <Checkbox checked={data[item.key] === false} onCheckedChange={(c) => !readOnly && setFormData(p => ({...p, [item.key]: c ? false : null}))} disabled={readOnly} className="h-3 w-3" /><span>NO</span>
               </div>
