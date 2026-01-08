@@ -82,6 +82,7 @@ const getNextWorkingDay = (date, holidayList = []) => {
 
 export default function AgendaPage() {
   const { ambulatorio } = useAmbulatorio();
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [initialLoadDone, setInitialLoadDone] = useState(false);
   const [appointments, setAppointments] = useState([]);
@@ -107,6 +108,11 @@ export default function AgendaPage() {
   const [newPatientCognome, setNewPatientCognome] = useState("");
 
   const isVillaGinestre = ambulatorio === "villa_ginestre";
+
+  // Naviga alla cartella clinica del paziente
+  const goToPatientFolder = (patientId) => {
+    navigate(`/patients/${patientId}`);
+  };
 
   const fetchData = useCallback(async () => {
     setLoading(true);
