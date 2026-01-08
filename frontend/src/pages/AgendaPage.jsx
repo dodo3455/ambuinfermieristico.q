@@ -44,6 +44,18 @@ const TIME_SLOTS = [
   "15:00", "15:30", "16:00", "16:30", "17:00"
 ];
 
+// Funzione per ottenere classe colore in base allo stato
+const getStatoColorClass = (stato) => {
+  switch (stato) {
+    case "effettuato":
+      return "bg-green-500 text-white border-green-600";
+    case "non_presentato":
+      return "bg-red-500 text-white border-red-600";
+    default: // da_fare
+      return "bg-slate-800 text-white border-slate-900";
+  }
+};
+
 const PRESTAZIONI_PICC = [
   { id: "medicazione_semplice", label: "Medicazione semplice", icon: Bandage },
   { id: "irrigazione_catetere", label: "Irrigazione catetere", icon: Droplets },
