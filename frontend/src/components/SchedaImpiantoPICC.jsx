@@ -32,16 +32,16 @@ import { toast } from "sonner";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
 
-// Opzioni per i tipi di catetere
+// Opzioni per i tipi di catetere - aggiornato da nuovo PDF
 const TIPO_CATETERE_OPTIONS = [
-  { id: "cvc_non_tunnellizzato", label: "CVC non tunnellizzato (breve termine)" },
-  { id: "cvc_tunnellizzato", label: "CVC tunnellizzato (lungo termine tipo Groshong, Hickman, Broviac)" },
-  { id: "picc", label: "CVC medio termine (PICC)" },
-  { id: "port", label: "PORT (lungo termine)" },
+  { id: "picc", label: "PICC" },
   { id: "midline", label: "Midline" },
+  { id: "picc_port", label: "PICC Port" },
+  { id: "port_a_cath", label: "PORT a cath" },
+  { id: "altro", label: "Altro" },
 ];
 
-// Opzioni semplificate
+// Opzioni semplificate (mantenute per retrocompatibilità)
 const TIPO_IMPIANTO_SEMPLICE = [
   { id: "picc", label: "PICC" },
   { id: "picc_port", label: "PICC Port" },
