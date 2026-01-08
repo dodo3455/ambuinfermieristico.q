@@ -467,8 +467,9 @@ export default function AgendaPage() {
                         <div
                           key={apt.id}
                           className={`relative px-4 py-2 rounded-lg border-2 cursor-pointer transition-all shadow-sm hover:shadow-md ${getStatoColorClass(apt.stato || "da_fare")}`}
-                          title={`${apt.prestazioni.join(", ")} - Clicca per gestire`}
+                          title={`Click: gestisci | Doppio click: vai alla cartella`}
                           onClick={(e) => handleOpenEditDialog(e, apt)}
+                          onDoubleClick={(e) => { e.stopPropagation(); goToPatientFolder(apt.patient_id); }}
                         >
                           <span className="font-bold text-base block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
                         </div>
@@ -494,8 +495,9 @@ export default function AgendaPage() {
                           <div
                             key={apt.id}
                             className={`relative px-4 py-2 rounded-lg border-2 cursor-pointer transition-all shadow-sm hover:shadow-md ${getStatoColorClass(apt.stato || "da_fare")}`}
-                            title={`${apt.prestazioni.join(", ")} - Clicca per gestire`}
+                            title={`Click: gestisci | Doppio click: vai alla cartella`}
                             onClick={(e) => handleOpenEditDialog(e, apt)}
+                            onDoubleClick={(e) => { e.stopPropagation(); goToPatientFolder(apt.patient_id); }}
                           >
                             <span className="font-bold text-base block">{apt.patient_cognome} {apt.patient_nome?.charAt(0)}.</span>
                           </div>
