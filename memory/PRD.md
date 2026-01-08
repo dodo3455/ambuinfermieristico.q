@@ -17,63 +17,45 @@ Applicazione web full-stack per la gestione di un ambulatorio infermieristico co
 
 ### Sessione 08/01/2026
 
-#### Agenda - Gestione Appuntamenti
-- Nome paziente più grande e visibile (font-bold text-base)
-- Colorazione stato appuntamenti:
-  - Nero (da_fare)
-  - Verde (effettuato)
-  - Rosso (non_presentato)
-- Dialog di modifica al click sul nome con:
+#### Agenda - Gestione Appuntamenti Avanzata
+- Nome paziente grande e visibile (font-bold text-base)
+- Colorazione stato: Nero (da_fare), Verde (effettuato), Rosso (non_presentato)
+- **Click singolo**: apre popup di gestione appuntamento
+- **Doppio click**: naviga direttamente alla cartella clinica del paziente
+- Popup di gestione con:
   - Cambio stato (Effettuato/Non Presentato)
   - Modifica prestazioni
+  - Pulsante "Apri Cartella" per navigare alla cartella clinica
   - Eliminazione appuntamento
+
+#### Stampa PDF Scheda Impianto - Aggiornata
+- Nuovi tipi catetere: PICC, Midline, PICC Port, PORT a cath, Altro
+- Nuovi campi misure: Diametro vena (mm), Profondità (cm), Lunghezza totale/impiantata (cm), French, Lumi, Lotto
+- Nuove procedure: Colla hystoacrilica, ECG intracavitario
+- Motivazioni aggiornate: NPT, Scarso patrimonio venoso
+- Footer con 1° e 2° Operatore
 
 #### Modulistica PICC Aggiornata
 - Sostituito "Specifiche Impianto" con "Scheda Impianto" (nuovo PDF)
 - Rinominato documenti per chiarezza
 
-#### Scheda Impianto PICC - Nuovi Campi
-- Tipo catetere: PICC, Midline, PICC Port, PORT a cath, Altro
-- Campi numerici: diametro_vena_mm, profondita_cm, lunghezza_totale_cm, lunghezza_impiantata_cm, french, lumi, lotto
-- Procedure: colla_hystoacrilica, ecg_intracavitario
-- Motivazioni: NPT, Scarso patrimonio venoso
-- Secondo operatore nel footer
-
 ### Sessioni Precedenti
 - Clonazione e setup progetto
 - Form Scheda Impianto PICC (versione completa e semplificata)
-- Correzione errori backend (NameError, validazione Pydantic)
+- Correzione errori backend
 - Rimozione sistema codici identificativi
 - Miglioramento anteprima foto
-- Descrizioni automatiche foto medicazione
 
 ## Backlog / TODO
 
-### P0 - Urgente
-- Testare download PDF sezioni separate (anagrafica, medicazione, impianto, gestione)
-
 ### P1 - Importante
-- Verificare stampa PDF scheda impianto con nuovi campi
+- Testare download PDF sezioni separate (anagrafica, medicazione, impianto, gestione)
 - Implementare funzionalità ritaglio foto
 
 ### P2 - Nice to Have
 - Separare "Gestione PICC" come sezione indipendente nel download
 
 ## Schema Database
-
-### patients
-```json
-{
-  "id": "uuid",
-  "nome": "string",
-  "cognome": "string",
-  "sesso": "M/F",
-  "data_nascita": "date",
-  "tipo": "picc/med/picc_med",
-  "ambulatorio": "pta_centro/villa_ginestre",
-  "status": "in_cura/sospeso/dimesso"
-}
-```
 
 ### appointments
 ```json
@@ -95,14 +77,14 @@ Applicazione web full-stack per la gestione di un ambulatorio infermieristico co
   "patient_id": "uuid",
   "scheda_type": "completa/semplificata",
   "tipo_catetere": "picc/midline/picc_port/port_a_cath/altro",
-  "braccio": "dx/sn",
-  "vena": "basilica/cefalica/brachiale",
-  "french": "string",
-  "lumi": "string",
   "diametro_vena_mm": "string",
   "lunghezza_totale_cm": "string",
+  "french": "string",
+  "lumi": "string",
   "operatore": "string",
-  "secondo_operatore": "string"
+  "secondo_operatore": "string",
+  "colla_hystoacrilica": "boolean",
+  "ecg_intracavitario": "boolean"
 }
 ```
 
@@ -111,4 +93,3 @@ Applicazione web full-stack per la gestione di un ambulatorio infermieristico co
 - `/app/frontend/src/components/SchedaImpiantoPICC.jsx` - Form scheda impianto
 - `/app/frontend/src/pages/AgendaPage.jsx` - Agenda appuntamenti
 - `/app/frontend/src/pages/ModulisticaPage.jsx` - Modulistica scaricabile
-- `/app/frontend/src/pages/PatientDetailPage.jsx` - Dettaglio paziente
